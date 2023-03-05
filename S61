@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+class Bucket
+{
+public:
+    int volume = 12; // Объем в литрах
+    int used = 3; // сколько литров уже налито
+    void flush() // Опустошаем ведро
+    {
+        used = 0;
+    }
+    int fill(int v)
+    {
+        if (v > (volume - used)) // условие: проверяем, хватает ли места в ведре для жидкости
+        {
+            v = v - (volume - used); // если не хватает, то возвращаем разницу
+            used = volume; // ведро заполняется до макс. возможного
+        }
+        else
+        {
+          used = used + v; // если хватает, то ведро заполняется
+          v = 0;
+        }
+    return v;
+    }
+};
+
+int main()
+{
+setlocale(LC_ALL, "Russian");
+    Bucket test;
+cout << "1) " << test.volume << ", " << test.used << "\n";
+int rest = test.fill(14);
+cout << "2) " << test.used << ", " << rest << "\n";
+
+test.flush();
+rest = test.fill(8);
+cout << "3) " << test.used << ", " << rest << "\n";
+return 0;
+}
